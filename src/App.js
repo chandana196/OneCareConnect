@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './Componants/Home';
+import PatientRegd from './Componants/PatientRegd';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path='/Signin' element={<Signin />}/>
           <Route path='/Signup' element={<Signup />}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/> 
-          <Route path='/Profile' element={<ProfilePage />} />       
+          <Route path='/Profile' element={<ProfilePage />} />  
+          <Route path='/PatientRegd' element={<PatientRegd />} />     
       </Routes>     
     </div>
   );

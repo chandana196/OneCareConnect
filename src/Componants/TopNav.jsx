@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown, InputGroup, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import '../styles/TopNav.css';
 
 const TopNav = () => {
@@ -14,13 +14,24 @@ const TopNav = () => {
     return (
         <Navbar bg="primary" data-bs-theme="light" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
             <Navbar.Brand href="/">One Care Connect</Navbar.Brand>
-            <div className='ms-auto'>
-            <Form.Control size="sm" type="text" placeholder="Enter Patient Id" aria-describedby="newPatient"/>
-            <Form.Text id='newPatient'>
-                <a href='/patient-registration'>New Patient Registration</a>
-            </Form.Text>
-            </div>
-            <Nav className="ms-auto">
+            
+            <div className='ms-auto d-flex flex-row align-items-center gap-3'>
+            <Form style={{height: '2rem'}}>
+            <InputGroup>
+                <Form.Control 
+                size="sm" 
+                type="text" 
+                fontSize="2px"
+                placeholder="Enter Patient Id"
+                aria-label="Search"
+                style={{height: '2rem'}}
+                />
+                <Button variant="secondary" style={{height: '2rem', paddingTop: '0.15rem'}}>
+                    <FaSearch />
+                </Button>
+            </InputGroup>
+            </Form>
+            <Nav>
                 <Dropdown show={show} onToggle={handleToggle}>
                     <Dropdown.Toggle as={Nav.Link} id="dropdown-custom-components" className="custom-dropdown-toggle">
                         <FaUserCircle size={30} />
@@ -32,6 +43,7 @@ const TopNav = () => {
                     </Dropdown.Menu>
                 </Dropdown>
             </Nav>
+            </div>
         </Navbar>
     );
 };
