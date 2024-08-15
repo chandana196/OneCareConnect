@@ -3,13 +3,14 @@ import { Accordion, Button, Table } from 'react-bootstrap';
 import EditDoctor from './EditDoctor';
 import { FaEdit } from 'react-icons/fa';
 
-const Departments = ({ departments }) => {
-    
+const Departments = ({ departments }) => {   
 
     const [showModal, setShowModal] = useState(false);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [selectedDeptId, setSelectedDeptId] = useState(null);
     
-    const handleShowDr = (doctor) => {
+    const handleShowDr = (deptId, doctor) => {
+      setSelectedDeptId(deptId);
         setSelectedDoctor(doctor);
         setShowModal(true);
     };
@@ -19,6 +20,7 @@ const Departments = ({ departments }) => {
     const handleSaveDr = (doctor) => {
         console.log('Saved doctor details:', doctor);
         setShowModal(false);
+        window.location.reload();
     };
 
   return (
@@ -26,13 +28,13 @@ const Departments = ({ departments }) => {
     <Accordion>
       {departments.map((dept, index) => (
         <Accordion.Item eventKey={index.toString()} key={index}>
-          <Accordion.Header>{dept.name}</Accordion.Header>
+          <Accordion.Header>{dept.deptName}</Accordion.Header>
           <Accordion.Body>
             <div className="table-responsive">
                 <Table striped bordered hover>
                 <thead>
                     <tr>
-                    <th>Regd ID</th>
+                    <th>Doc Id</th>
                     <th>Name</th>
                     {/* <th>Department</th> */}
                     <th>Education</th>
@@ -44,15 +46,14 @@ const Departments = ({ departments }) => {
                 <tbody>
                     {dept.doctors.map((doctor, idx) => (
                     <tr key={idx}>
-                        <td>{doctor.regdId}</td>
-                        <td>{doctor.name}</td>
-                        {/* <td>{doctor.dept}</td> */}
-                        <td>{doctor.education}</td>
-                        <td>{doctor.experience}</td>
-                        {/* <td>{doctor.bio}</td> */}
+                        <td>{doctor.docId}</td>
+                        <td>{doctor.docName}</td>
+                        <td>{doctor.docEducation}</td>
+                        <td>{doctor.docExperience}</td>
+                        {/* <td>{doctor.docBio}</td> */}
                         <td>
                         <FaEdit
-                          onClick={() => handleShowDr(doctor)}
+                          onClick={() => handleShowDr(dept.deptId, doctor)}
                           style={{ cursor: 'pointer' }}
                         />
                         {/* <Button onClick={() => handleShowDr(doctor)}>Edit</Button> */}
@@ -62,7 +63,7 @@ const Departments = ({ departments }) => {
                 </tbody>
                 </Table>
             </div>
-            <Button onClick={() => handleShowDr(null)}>Add Doctor</Button>
+            <Button onClick={() => handleShowDr(dept.deptId, null)}>Add Doctor</Button>
           </Accordion.Body>
         </Accordion.Item>
       ))}
@@ -86,7 +87,7 @@ const Departments = ({ departments }) => {
             </Accordion.Item>
         ))}
     </Accordion> */}
-    <EditDoctor show={showModal} handleClose={handleCloseDr} doctor={selectedDoctor} handleSave={handleSaveDr} />
+    <EditDoctor show={showModal} handleClose={handleCloseDr} doctor={selectedDoctor} deptId={selectedDeptId} handleSave={handleSaveDr} />
     </div>
   );
 };

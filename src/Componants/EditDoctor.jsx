@@ -1,45 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
-const EditDoctor = ({ show, handleClose, doctor, handleSave }) => {
+const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
   const [formData, setFormData] = useState({
-    regdId: '',
-    name: '',
-    dept: '',
-    education: '',
-    experience: '',
-    bio: ''
+    deptId: deptId,
+    docId: '',
+    docName: '',
+    docEducation: '',
+    docExperience: '',
+    docBio: ''
   });
 
   useEffect(() => {
     if (doctor) {
       setFormData({
-        regdId: doctor.regdId || '',
-        name: doctor.name || '',
-        dept: doctor.dept || '',
-        education: doctor.education || '',
-        experience: doctor.experience || '',
-        bio: doctor.bio || ''
+        deptId: doctor.deptId || '',
+        docName: doctor.docName || '',
+        docId: doctor.docId || '',
+        docEducation: doctor.docEducation || '',
+        docExperience: doctor.docExperience || '',
+        docBio: doctor.docBio || ''
       });
     } else {
       setFormData({
-        regdId: '',
-        name: '',
-        dept: '',
-        education: '',
-        experience: '',
-        bio: ''
+        deptId: deptId,
+        docId: '',
+        docName: '',
+        docEducation: '',
+        docExperience: '',
+        docBio: ''
       });
     }
   }, [doctor]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.id]: e.target.value, });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if(doctor) {
+      try {
+        const response = await axios.put('http://localhost:8080/hospital/edit-doctor', formData);
+        console.log(response);
+        toast.success('doctor updated successfully');
+      } catch (error) {
+        toast.error(error.response.data.responseMessage);
+        console.error('Profile update error:', error);
+      }
+    }
+    else {
+      try {
+        const response = await axios.post('http://localhost:8080/hospital/add-doctor', formData);
+        console.log(response);
+        toast.success('doctor added successfully');
+      } catch (error) {
+        toast.error(error.response.data.responseMessage);
+        console.error('Profile update error:', error);
+      }
+    }
     handleSave(formData);
   };
 
@@ -50,62 +71,42 @@ const EditDoctor = ({ show, handleClose, doctor, handleSave }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formRegdId">
-            <Form.Label>Regd ID</Form.Label>
-            <Form.Control
-              type="text"
-              name="regdId"
-              value={formData.regdId}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formName">
+          <Form.Group controlId="docName">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               name="name"
-              value={formData.name}
+              value={formData.docName}
               onChange={handleChange}
               required
             />
           </Form.Group>
-          <Form.Group controlId="formDept">
-            <Form.Label>Department</Form.Label>
-            <Form.Control
-              type="text"
-              name="dept"
-              value={formData.dept}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formEducation">
+          <Form.Group controlId="docEducation">
             <Form.Label>Education</Form.Label>
             <Form.Control
               type="text"
               name="education"
-              value={formData.education}
+              value={formData.docEducation}
               onChange={handleChange}
               required
             />
           </Form.Group>
-          <Form.Group controlId="formExperience">
+          <Form.Group controlId="docExperience">
             <Form.Label>Experience</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="experience"
-              value={formData.experience}
+              value={formData.docExperience}
               onChange={handleChange}
               required
             />
           </Form.Group>
-          <Form.Group controlId="formBio">
+          <Form.Group controlId="docBio">
             <Form.Label>Bio</Form.Label>
             <Form.Control
               as="textarea"
               name="bio"
-              value={formData.bio}
+              value={formData.docBio}
               onChange={handleChange}
               required
             />

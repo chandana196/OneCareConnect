@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Dropdown, InputGroup, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import '../styles/TopNav.css';
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TopNav = () => {
+    const navigate = useNavigate();
+    const [isSignedIn, setIsSignedIn] = useState(false);
     const [show, setShow] = useState(false);
 
     const handleToggle = (isOpen) => {
         setShow(isOpen);
+    };
+
+    useEffect(() => {
+        const encryptedUserId = sessionStorage.getItem('userId');
+        if (encryptedUserId)
+            setIsSignedIn(true);
+    }, []);
+
+    const handleSignOut = () => {
+        sessionStorage.removeItem('userId');
+        setIsSignedIn(false);
+        toast.success("Signed out successfully")
+        navigate("/"); // Redirect to home page
     };
 
     return (
@@ -37,10 +54,15 @@ const TopNav = () => {
                         <FaUserCircle size={30} />
                     </Dropdown.Toggle>
                     <Dropdown.Menu align="end">
-                        <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                    {isSignedIn ? (
+                        <>
+                            <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                            <Dropdown.Item onClick={handleSignOut}>Sign Out</Dropdown.Item>
+                        </>
+                    ) : (
                         <Dropdown.Item href="/signin">Sign In</Dropdown.Item>
-                        <Dropdown.Item href="#signout">Sign Out</Dropdown.Item>
-                    </Dropdown.Menu>
+                    )}
+                </Dropdown.Menu>
                 </Dropdown>
             </Nav>
             </div>
