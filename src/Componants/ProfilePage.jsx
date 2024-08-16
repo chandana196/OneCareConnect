@@ -168,10 +168,9 @@ const Profile = () => {
 
     return (
         <Container>
-            <h1 className="my-4">{profile.name || 'Hospital Name'}</h1>
+            <h1 className="my-4">{profile.hospitalName || 'Hospital Name'}</h1>
             <Row>
                 <Col md={6}>
-                    <h3>Hospital Profile Details</h3>
                     <Form noValidate validated={validated}>
                         <Form.Group className="mb-3" controlId="hospitalName">
                             <Form.Label>Hospital Id</Form.Label>
@@ -279,7 +278,7 @@ const Profile = () => {
                         ) : (
                             <Button variant="secondary" onClick={handleEdit}>Edit</Button>
                         )}
-                        <Button variant="primary" onClick={handleOpenDeptModal}>Add Dept</Button>
+                        <Button variant="primary" onClick={handleOpenDeptModal} style={{marginLeft:'1rem'}}>Add Dept</Button>
                         </Form>
                 </Col>
                 <Col md={6}>
