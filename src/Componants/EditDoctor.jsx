@@ -6,7 +6,7 @@ import axios from 'axios';
 const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {  
   const apiUrl = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
-    deptId: deptId,
+    deptId: '',
     docId: '',
     docName: '',
     docEducation: '',
@@ -26,7 +26,7 @@ const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
       });
     } else {
       setFormData({
-        deptId: deptId,
+        deptId: '',
         docId: '',
         docName: '',
         docEducation: '',
@@ -54,6 +54,7 @@ const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
     }
     else {
       try {
+        setFormData({ ...formData, deptId: deptId });
         const response = await axios.post(`${apiUrl}/hospital/add-doctor`, formData);
         console.log(response);
         toast.success('doctor added successfully');
