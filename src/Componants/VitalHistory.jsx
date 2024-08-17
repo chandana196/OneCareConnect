@@ -11,6 +11,7 @@ const VitalHistory = ({ patientId }) => {
   const [currentVital, setCurrentVital] = useState({ patientId: patientId, vitalType: '', vitalValue: '', vitalDate: '' });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchVitals();
@@ -18,7 +19,7 @@ const VitalHistory = ({ patientId }) => {
 
   const fetchVitals = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/patient/fetch-vitals/${patientId}`);
+      const response = await axios.get(`${apiUrl}/patient/fetch-vitals/${patientId}`);
       setVitals(response.data);
     } catch (error) {
       console.error('Error fetching vitals:', error);
@@ -35,11 +36,11 @@ const VitalHistory = ({ patientId }) => {
   const handleSave = async () => {
     try {
       if (currentVital.vitalId) {
-        await axios.put(`http://localhost:8080/patient/edit-vital`, currentVital);
+        await axios.put(`${apiUrl}/patient/edit-vital`, currentVital);
         setVitals(vitals.map(v => (v.vitalId === currentVital.vitalId ? currentVital : v)));
         toast.success('Vital updated successfully');
       } else {
-        const response = await axios.post('http://localhost:8080/patient/add-vital', currentVital);
+        const response = await axios.post(`${apiUrl}/patient/add-vital`, currentVital);
         setVitals([...vitals, { ...response.data }]);
         toast.success('Vital added successfully');
       }

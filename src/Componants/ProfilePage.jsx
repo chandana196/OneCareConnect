@@ -35,6 +35,8 @@ const Profile = () => {
         contactNo: ''
     });
     const [departments, setDepartments] = useState([]);
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const encryptionKey = process.env.REACT_APP_Encryption_key;
 
     const validate = () => {
         const newErrors = {
@@ -104,11 +106,11 @@ const Profile = () => {
                 // Retrieve and decrypt userId from sessionStorage
                 const encryptedUserId = sessionStorage.getItem('userId');
                 if (encryptedUserId) {
-                    const bytes = CryptoJS.AES.decrypt(encryptedUserId, 'your-encryption-key');
+                    const bytes = CryptoJS.AES.decrypt(encryptedUserId, encryptionKey);
                     const decryptedUserId = bytes.toString(CryptoJS.enc.Utf8);
 
                     // Call API to fetch profile
-                    const response = await axios.get(`http://localhost:8080/hospital/fetch-profile/${decryptedUserId}`);
+                    const response = await axios.get(`${apiUrl}/hospital/fetch-profile/${decryptedUserId}`);
                     const data = response.data;
 
                     // Update state with the fetched data
@@ -155,7 +157,7 @@ const Profile = () => {
         e.preventDefault();
         if (validate()) {
         try {
-          const response = await axios.put('http://localhost:8080/hospital/update-profile', profile);
+          const response = await axios.put(`${apiUrl}/hospital/update-profile`, profile);
           console.log(response);
           toast.success('profile updated successfully');
         } catch (error) {

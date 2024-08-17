@@ -3,7 +3,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
+const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {  
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     deptId: deptId,
     docId: '',
@@ -43,7 +44,7 @@ const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
     e.preventDefault();
     if(doctor) {
       try {
-        const response = await axios.put('http://localhost:8080/hospital/edit-doctor', formData);
+        const response = await axios.put(`${apiUrl}/hospital/edit-doctor`, formData);
         console.log(response);
         toast.success('doctor updated successfully');
       } catch (error) {
@@ -53,7 +54,7 @@ const EditDoctor = ({ show, handleClose, doctor, deptId, handleSave }) => {
     }
     else {
       try {
-        const response = await axios.post('http://localhost:8080/hospital/add-doctor', formData);
+        const response = await axios.post(`${apiUrl}/hospital/add-doctor`, formData);
         console.log(response);
         toast.success('doctor added successfully');
       } catch (error) {

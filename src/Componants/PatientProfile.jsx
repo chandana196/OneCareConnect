@@ -34,12 +34,13 @@ const PatientProfile = () => {
     mobile: "",
     address: "",
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     // Fetch patient details by ID
     const fetchPatientData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/patient/fetch-profile/${patientId}`);
+        const response = await axios.get(`${apiUrl}/patient/fetch-profile/${patientId}`);
         setPatientData(response.data);
       } catch (error) {
         toast.error("Failed to fetch patient details.");
@@ -122,7 +123,7 @@ const PatientProfile = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.put(`http://localhost:8080/patient/update-profile`, patientData);
+        const response = await axios.put(`${apiUrl}/patient/update-profile`, patientData);
         toast.success("Patient details updated successfully.");
         setIsEditing(false);
         setPatientData(response.data); // Optionally refresh the data with the updated response

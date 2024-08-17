@@ -27,6 +27,7 @@ const SignupForm = () => {
     password: '',
     contactNo: ''
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const validate = () => {
     const newErrors = {
@@ -110,7 +111,7 @@ const SignupForm = () => {
     e.preventDefault();
     if (validate()) {
     try {
-      const response = await axios.post('http://localhost:8080/hospital/signup', formData);
+      const response = await axios.post(`${apiUrl}/hospital/signup`, formData);
       console.log('Signup successful. Your hospital Id is ', response.data.responseMessage);
       toast.success('Signup successful. Your hospital Id is ', response.data.responseMessage);
       navigate("/Signin");
@@ -184,15 +185,6 @@ const SignupForm = () => {
         <Form.Control.Feedback type="invalid">
           {errors.orgType}
         </Form.Control.Feedback>
-        {/* <Form.Select 
-          value={formData.orgType} 
-          onChange={handleChange}
-        >
-          <option value="">Select Type</option>
-          <option value="Government">Government</option>
-          <option value="Private">Private</option>
-          <option value="SemiPrivate">SemiPrivate</option>
-        </Form.Select> */}
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="regdNo">

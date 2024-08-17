@@ -5,7 +5,8 @@ import Pagination from 'react-bootstrap/Pagination';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const DiseaseHistory = ({ patientId }) => {
+const DiseaseHistory = ({ patientId }) => {    
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [diseases, setDiseases] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentDisease, setCurrentDisease] = useState({
@@ -27,7 +28,7 @@ const DiseaseHistory = ({ patientId }) => {
 
   const fetchDiseases = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/patient/fetch-diseases/${patientId}`);
+      const response = await axios.get(`${apiUrl}/patient/fetch-diseases/${patientId}`);
       setDiseases(response.data);
     } catch (error) {
       console.error('Error fetching diseases:', error);
@@ -53,11 +54,11 @@ const DiseaseHistory = ({ patientId }) => {
   const handleSave = async () => {
     try {
       if (currentDisease.diseaseId) {
-        await axios.put(`http://localhost:8080/patient/edit-disease`, currentDisease);
+        await axios.put(`${apiUrl}/patient/edit-disease`, currentDisease);
         setDiseases(diseases.map(d => (d.diseaseId === currentDisease.diseaseId ? currentDisease : d)));
         toast.success('Disease updated successfully');
       } else {
-        const response = await axios.post('http://localhost:8080/patient/add-disease', currentDisease);
+        const response = await axios.post(`${apiUrl}/patient/add-disease`, currentDisease);
         setDiseases([...diseases, { ...response.data }]);
         toast.success('Disease added successfully');
       }

@@ -15,6 +15,7 @@ const ForgotPassword = () =>{
     const [formData, setFormData] = useState({
       userId: ''
     });
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const validate = () => {
       const newErrors = { userId: '' };
@@ -40,7 +41,7 @@ const ForgotPassword = () =>{
       e.preventDefault();
       if (validate()) {
         try {
-          const response = await axios.get(`http://localhost:8080/hospital/forgot-password/${formData.userId}`);
+          const response = await axios.get(`${apiUrl}/hospital/forgot-password/${formData.userId}`);
           console.log(response.data.responseMessage);
           toast.success(response.data.responseMessage);
           toast.success("Password sent to your registered email !!");

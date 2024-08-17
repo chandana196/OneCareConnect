@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js';
 
 const getUserId = () => {
-    const encryptionKey = 'your-encryption-key'; // Use a strong key
+    const encryptionKey = process.env.REACT_APP_Encryption_key;
     const encryptedUserId = sessionStorage.getItem('userId');
     if (encryptedUserId) {
         const bytes = CryptoJS.AES.decrypt(encryptedUserId, encryptionKey);

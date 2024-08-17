@@ -10,7 +10,9 @@ import CryptoJS from 'crypto-js';
 
 const SigninForm = () => {
   const navigate = useNavigate();
-  const encryptionKey = 'your-encryption-key'; // Use a strong key
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const encryptionKey = process.env.REACT_APP_Encryption_key;
+  ; // Use a strong key
   const [formData, setFormData] = useState({
     userId: '',
     password: ''
@@ -48,7 +50,7 @@ const SigninForm = () => {
     e.preventDefault();
     if (validate()) {
     try {
-      const response = await axios.post('http://localhost:8080/hospital/signin', formData);
+      const response = await axios.post(`${apiUrl}/hospital/signin`, formData);
       console.log('Sign in successful:', response.data.responseMessage);
       const encryptedUserId = CryptoJS.AES.encrypt(formData.userId, encryptionKey).toString();
       sessionStorage.setItem('userId', encryptedUserId);

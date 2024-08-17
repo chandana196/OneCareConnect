@@ -97,10 +97,11 @@ const PatientSignupForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:8080/patient/signup', formData);
+        const response = await axios.post(`${apiUrl}/patient/signup`, formData);
         console.log('Signup successful. ' + response.data.responseMessage);
         toast.success('Signup successful. ' + response.data.responseMessage);
         navigate('/');

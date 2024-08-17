@@ -4,11 +4,13 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
-const EditDepartment = ({ show, handleClose, department, handleSave }) => {
+const EditDepartment = ({ show, handleClose, department, handleSave }) => {  
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const encryptionKey = process.env.REACT_APP_Encryption_key;
     const encryptedUserId = sessionStorage.getItem('userId'); 
     var decryptedUserId = '';
     if(encryptedUserId) {
-        const bytes = CryptoJS.AES.decrypt(encryptedUserId, 'your-encryption-key');
+        const bytes = CryptoJS.AES.decrypt(encryptedUserId, encryptionKey);
         decryptedUserId = bytes.toString(CryptoJS.enc.Utf8);
     }  
   const [formData, setFormData] = useState({
@@ -41,7 +43,7 @@ const EditDepartment = ({ show, handleClose, department, handleSave }) => {
     e.preventDefault();
     if (department) {
       try {
-        const response = await axios.put('http://localhost:8080/hospital/edit-department', formData);
+        const response = await axios.put(`${apiUrl}/hospital/edit-department`, formData);
         console.log(response);
         toast.success('Department updated successfully');
       } catch (error) {
@@ -50,7 +52,7 @@ const EditDepartment = ({ show, handleClose, department, handleSave }) => {
       }
     } else {
       try {
-        const response = await axios.post('http://localhost:8080/hospital/add-department', formData);
+        const response = await axios.post(`${apiUrl}/hospital/add-department`, formData);
         console.log(response);
         toast.success('Department added successfully');
       } catch (error) {
