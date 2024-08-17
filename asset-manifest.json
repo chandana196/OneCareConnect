@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.1533f969.css",
+    "main.js": "/react-gh-pages/static/js/main.9a12328e.js",
+    "static/js/453.8778f9c0.chunk.js": "/react-gh-pages/static/js/453.8778f9c0.chunk.js",
+    "static/media/medical1.jpg": "/react-gh-pages/static/media/medical1.14afb93ba30f63d7314a.jpg",
+    "index.html": "/react-gh-pages/index.html",
+    "main.1533f969.css.map": "/react-gh-pages/static/css/main.1533f969.css.map",
+    "main.9a12328e.js.map": "/react-gh-pages/static/js/main.9a12328e.js.map",
+    "453.8778f9c0.chunk.js.map": "/react-gh-pages/static/js/453.8778f9c0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1533f969.css",
+    "static/js/main.9a12328e.js"
+  ]
+}
