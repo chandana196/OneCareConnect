@@ -2,7 +2,7 @@
   "name": "one-care-connect",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chandana196.github.io/onecareconnect",
+  "homepage": "https://chandana196.github.io/OneCareConnect",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
