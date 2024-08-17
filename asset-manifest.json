@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/onecareconnect/static/css/main.b31d63fb.css",
-    "main.js": "/onecareconnect/static/js/main.0118bb8a.js",
-    "static/js/453.8778f9c0.chunk.js": "/onecareconnect/static/js/453.8778f9c0.chunk.js",
-    "static/media/medical1.jpg": "/onecareconnect/static/media/medical1.14afb93ba30f63d7314a.jpg",
-    "index.html": "/onecareconnect/index.html",
-    "main.b31d63fb.css.map": "/onecareconnect/static/css/main.b31d63fb.css.map",
-    "main.0118bb8a.js.map": "/onecareconnect/static/js/main.0118bb8a.js.map",
-    "453.8778f9c0.chunk.js.map": "/onecareconnect/static/js/453.8778f9c0.chunk.js.map"
+    "main.css": "/OneCareConnect/static/css/main.18794b70.css",
+    "main.js": "/OneCareConnect/static/js/main.1b267b7d.js",
+    "static/js/453.8778f9c0.chunk.js": "/OneCareConnect/static/js/453.8778f9c0.chunk.js",
+    "static/media/medical1.jpg": "/OneCareConnect/static/media/medical1.14afb93ba30f63d7314a.jpg",
+    "index.html": "/OneCareConnect/index.html",
+    "main.18794b70.css.map": "/OneCareConnect/static/css/main.18794b70.css.map",
+    "main.1b267b7d.js.map": "/OneCareConnect/static/js/main.1b267b7d.js.map",
+    "453.8778f9c0.chunk.js.map": "/OneCareConnect/static/js/453.8778f9c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b31d63fb.css",
-    "static/js/main.0118bb8a.js"
+    "static/css/main.18794b70.css",
+    "static/js/main.1b267b7d.js"
   ]
 }
