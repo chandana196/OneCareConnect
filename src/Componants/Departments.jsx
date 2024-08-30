@@ -20,7 +20,7 @@ const Departments = ({ departments }) => {
     const handleSaveDr = (doctor) => {
         console.log('Saved doctor details:', doctor);
         setShowModal(false);
-        window.location.reload();
+        // window.location.reload();
     };
 
   return (

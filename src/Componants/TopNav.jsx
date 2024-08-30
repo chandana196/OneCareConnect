@@ -33,7 +33,7 @@ const TopNav = () => {
         setIsSignedIn(false);
         toast.success("Signed out successfully")
         navigate("/"); // Redirect to home page
-        window.location.reload();
+        // window.location.reload();
     };
 
     const handleChange = (e) => {

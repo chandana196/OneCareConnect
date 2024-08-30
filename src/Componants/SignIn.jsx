@@ -56,7 +56,7 @@ const SigninForm = () => {
       sessionStorage.setItem('userId', encryptedUserId);
       toast.success('Login successful');
       navigate("/");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.responseMessage);

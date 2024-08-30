@@ -13,9 +13,9 @@ const Profile = () => {
     };
     const handleCloseDeptModal = () =>  {
         setShowDeptModal(false);
-        window.location.reload();
+        // window.location.reload();
     }
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);  
     const [profile, setProfile] = useState({
         userId: '',
         hospitalName: '',
